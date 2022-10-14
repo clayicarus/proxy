@@ -112,7 +112,7 @@ private:
             });
             fprintf(stderr, "%s : %s - Response\n* begin *\n%s\n* end *\n", time.toFormattedString().c_str(), conn->name().c_str(), req_str.c_str());
 #endif  // NOT_OUTPUT
-            LOG_INFO << conn->name() << " - Response to source";
+            LOG_DEBUG << conn->name() << " - Response to source";
             serverConn_->send(buf); // send response from destination to source
         } else {    // source died
             buf->retrieveAll(); // discard all received data

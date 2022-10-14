@@ -38,7 +38,7 @@ void onServerConnection(const TcpConnectionPtr &conn)
 void onServerMessage(const TcpConnectionPtr &conn, Buffer *buf, Timestamp time) // only receive requests from source
 {
     LOG_DEBUG << buf->readableBytes();
-    LOG_INFO << conn->name() << " - Request to destination";
+    LOG_DEBUG << conn->name() << " - Request to destination";
     if(!conn->getContext().empty()) {   // tunnel has connected to destination
         const auto &sourceConn = boost::any_cast<const TcpConnectionPtr&>(conn->getContext());
 #ifndef NOT_OUTPUT
