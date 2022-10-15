@@ -25,13 +25,15 @@ public:
     bool isValid() const { return valid_; }
     std::string toAllowResponse();
     std::string toRefuseResponse();
-    std::string toConnectionRefuseResponse();
-
 private:
     char ver_;
     char cmd_;
     muduo::net::InetAddress addr_;
     bool valid_;
+    std::string hostname_;
+
+    std::string toConnectionRefuseResponse();
+    bool resolveHostname();
 };
 
 

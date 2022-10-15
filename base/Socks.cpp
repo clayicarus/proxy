@@ -8,7 +8,8 @@
 using namespace muduo::net;
 using namespace muduo;
 
-bool Socks::decode(muduo::net::Buffer *buf) {
+bool Socks::decode(muduo::net::Buffer *buf)
+{
     if(buf->readableBytes() > 128) {
         valid_ = false;
         return false;
@@ -59,7 +60,8 @@ bool Socks::decode(muduo::net::Buffer *buf) {
     return false;
 }
 
-std::string Socks::toAllowResponse() {
+std::string Socks::toAllowResponse()
+{
     char response[] = "\0\x5aPTIPV4";
     auto port = addr_.port();
     auto ip = addr_.ipv4NetEndian();
@@ -69,14 +71,26 @@ std::string Socks::toAllowResponse() {
     return string(response, response + 8);
 }
 
-std::string Socks::toRefuseResponse() {
+std::string Socks::toRefuseResponse()
+{
     char response[] = "\0\x5bPTIPV4";
     return string(response, response + 8);
 }
 
-std::string Socks::toConnectionRefuseResponse() {
+std::string Socks::toConnectionRefuseResponse()
+{
     char response[] = "\0\x5cPTIPV4";
     return string(response, response + 8);
+}
+
+bool Socks::resolveHostname()
+{
+    InetAddress tmp(addr_);
+
+    auto sock = *addr_.getSockAddr();
+    sockaddr_in sock_addr = *reinterpret_cast<sockaddr_in*>(&sock);
+
+    return false;
 }
 
 
